@@ -9,6 +9,8 @@ services:
       RAILS_ENV: development
       VIRTUAL_HOST: lti13testtool.docker
       REDIS_URL: redis://redis:6379
+      DB_USERNAME: postgres
+      DB_ADDRESS: postgres
     links:
       - postgres
       - redis
@@ -18,6 +20,8 @@ services:
         max-size: 1m
     networks:
       - default
+    ports:
+      - 8082:80
 
   redis:
     image: redis:3.2
@@ -32,14 +36,3 @@ services:
       options:
         max-file: '5'
         max-size: 1m
-
-  pgweb:
-    image: sosedoff/pgweb
-    command: [
-      /usr/bin/pgweb, --bind=0.0.0.0, --ssl=disable, --db=lti-1_3-test-tool_development,
-      --host=postgres, --user=postgres, --pass=lti-13-test-tool-password
-    ]
-    environment:
-      VIRTUAL_HOST: pgweb.lti13testtool.docker
-    links:
-      - postgres
