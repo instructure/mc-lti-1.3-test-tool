@@ -1,0 +1,76 @@
+<%= form_tag(deep_linking_redirect_url, method: 'post') do %>
+  <div class="form-group">
+    <div class="form-group">
+      <label class="form-label" for="without-content-items">Without Content Items</label>
+      <input type="checkbox" name="without_content_items" id="without-content-items">
+    </div>
+
+    <label class="form-label" for="content-type">Content Item Type</label>
+    <select class="form-select" name="content_type" id="content-type">
+      <option value="link">Link</option>
+      <option value="lti_resource_link" selected="true">LTI Resource Link</option>
+      <option value="image">Image</option>
+      <option value="html_fragment">HTML Fragment</option>
+      <option value="file">File</option>
+    </select>
+  </div>
+
+  <% if @deep_link_accept_multiple %>
+    <div class="form-group">
+      <label class="form-label" for="multiple-items">Return multiple Content Items</label>
+      <input type="checkbox" name="multiple_items" id="multiple-items">
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="form-label" for="custom_params">Custom Params (JSON)</label>
+    <textarea class="form-input" id="custom_params" rows="3" name="custom"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="message">Message</label>
+    <input class="form-input" type="text" id="message" name="message" />
+
+    <label class="form-label" for="error_message">Error Message</label>
+    <input class="form-input" type="text" id="error_message" name="error_message" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="log">Log</label>
+    <input class="form-input" type="text" id="log" name="log" />
+
+    <label class="form-label" for="error_log">Error Log</label>
+    <input class="form-input" type="text" id="error_log" name="error_log" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="thumbnail">Thumbnail URL</label>
+    <input class="form-input" type="text" id="thumbnail" name="thumbnail" value="https://via.placeholder.com/150?text=thumbnail"/>
+
+    <label class="form-label" for="text">File Name</label>
+    <input class="form-input" type="text" id="text" name="text" />
+
+    <label class="form-label" for="url">File URL</label>
+    <input class="form-input" type="text" id="url" name="url" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="embed">Embed</label>
+    <textarea class="form-input" id="embed" rows="3" name="embed"></textarea>
+
+    <label class="form-label" for="window">Window</label>
+    <textarea class="form-input" id="window" rows="3" name="window"></textarea>
+
+    <label class="form-label" for="iframe">iframe</label>
+    <textarea class="form-input" id="iframe" rows="3" name="iframe"></textarea>
+
+    <label class="form-label" for="html">HTML</label>
+    <textarea class="form-input" id="html" rows="3" name="html"></textarea>
+  </div>
+
+  <%= hidden_field_tag('deployment_id', @deployment_id) %>
+  <%= hidden_field_tag('iss', @iss) %>
+  <%= hidden_field_tag('aud', @aud) %>
+  <%= hidden_field_tag('deep_link_return_url', @deep_link_return_url) %>
+  <input type="submit" class="btn btn-primary" />
+<% end %>

@@ -1,0 +1,209 @@
+<div class="container">
+  <div class="columns">
+    <div class="column col-12">
+      <h1>AGS Request Form</h1>
+      Make a request to get line items, create line items, score line_items for users, and request results for users.
+
+      <h2>Line Item Actions</h2>
+
+      <h3>Retrieve List of LineItems</h3>
+      <%= form_tag('/ags/line_items', method: 'get') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="credential_id">Credential Id</label>
+          <%= number_field_tag('credential_id', '', required: true) %>
+
+          <label class="form-label" for="context_id">Course Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="id">Id</label>
+          <%= text_field_tag('id', '') %>
+
+          <label class="form-label" for="resource_link_id">Resource Link Id</label>
+          <%= text_field_tag('resource_link_id', '') %>
+
+          <label class="form-label" for="resource_id">Resource Id</label>
+          <%= text_field_tag('resource_id', '') %>
+
+          <label class="form-label" for="tag">Tag</label>
+          <%= text_field_tag('tag', '') %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+
+      <h3>Create LineItem</h3>
+      <%= form_tag('/ags/line_items', method: 'post') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="credential_id">Credential Id</label>
+          <%= number_field_tag('credential_id', '', required: true) %>
+
+          <label class="form-label" for="context_id">Course Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="scoreMaximum">Score Maximum</label>
+          <%= number_field_tag('scoreMaximum', '', required: true) %>
+
+          <label class="form-label" for="submissionType">Submission Type</label>
+          <%= select_tag "submissionType", options_for_select(@submission_types, 'NoSubmission') %>
+
+          <label class="form-label" for="externalToolUrl">External Tool Url</label>
+          <%= text_field_tag('externalToolUrl', '') %>
+
+          <label class="form-label" for="label">Label</label>
+          <%= text_field_tag('label', '') %>
+
+          <label class="form-label" for="resourceId">Resource Id</label>
+          <%= text_field_tag('resourceId', '') %>
+
+          <label class="form-label" for="resourceLinkId">Resource Link Id</label>
+          <%= text_field_tag('resourceLinkId', '') %>
+
+          <label class="form-label" for="tag">Tag</label>
+          <%= text_field_tag('tag', '') %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+
+      <h3>Update LineItem</h3>
+      <%= form_tag('/ags/line_items', method: 'put') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="credential_id">Credential Id</label>
+          <%= number_field_tag('credential_id', '', required: true) %>
+
+          <label class="form-label" for="context_id">Course Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="id">Id</label>
+          <%= text_field_tag('id', '', required: true) %>
+
+          <label class="form-label" for="scoreMaximum">Score Maximum</label>
+          <%= number_field_tag('scoreMaximum', '') %>
+
+          <label class="form-label" for="label">Label</label>
+          <%= text_field_tag('label', '') %>
+
+          <label class="form-label" for="resourceId">Resource Id</label>
+          <%= text_field_tag('resourceId', '') %>
+
+          <label class="form-label" for="tag">Tag</label>
+          <%= text_field_tag('tag', '') %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+
+      <h3>Delete LineItem</h3>
+      <%= form_tag('/ags/line_items', method: 'delete') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="credential_id">Credential Id</label>
+          <%= number_field_tag('credential_id', '', required: true) %>
+
+          <label class="form-label" for="context_id">Course Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="id">Id</label>
+          <%= text_field_tag('id', '', required: true) %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+
+      <h2>Score Action</h2>
+
+      <h3>Set score of line item for user</h3>
+      <%= form_tag('/ags/scores', method: 'post') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="credential_id">Credential Id</label>
+          <%= number_field_tag('credential_id', '', required: true) %>
+
+          <label class="form-label" for="context_id">Course Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="line_item_id">Line Item Id</label>
+          <%= number_field_tag('line_item_id', '', required: true) %>
+
+          <label class="form-label" for="userId">User Id</label>
+          <%= text_field_tag('userId', '', required: true) %>
+
+          <label class="form-label" for="activityProgress">Activity Progress</label>
+          <%= select_tag "activityProgress", options_for_select(@activity_progress, 'Initialized') %>
+
+          <label class="form-label" for="gradingProgress">Grading Progress</label>
+          <%= select_tag "gradingProgress", options_for_select(@grading_progress, 'FullyGraded') %>
+
+          <label class="form-label" for="scoreGiven">Score Given</label>
+          <%= number_field_tag('scoreGiven', '') %>
+
+          <label class="form-label" for="scoreMaximum">Score Maximum</label>
+          <%= number_field_tag('scoreMaximum', '') %>
+
+          <label class="form-label" for="comment">Comment</label>
+          <%= text_field_tag('comment', '') %>
+
+          <label class="form-label" for="newSubmission">New Submission</label>
+          <%= check_box_tag('newSubmission', '1', true) %>
+
+          <label class="form-label" for="submissionScoreType">Submission Type</label>
+          <%= select_tag "submissionScoreType", options_for_select(@submission_score_types, 'none') %>
+
+          <label class="form-label" for="submissionUrl">Submission Data</label>
+          <%= text_field_tag('submissionScoreData', '') %>
+
+          <label class="form-label" for="sendSubmittedAt">Send Submitted At</label>
+          <%= check_box_tag('sendSubmittedAt', '1', true) %>
+
+          <label class="form-label" for="submittedAt"">Submitted At (ISO8601 Timestamp)</label>
+          <%= text_field_tag('submittedAt', Time.zone.now.iso8601(3)) %>
+
+          <label class="form-label" for="sendContentItem">Send a File-type Content Item?</label>
+          <%= check_box_tag('sendContentItem', '1', false) %>
+
+          <label class="form-label" for="contentItemTitle">Content Item Title</label>
+          <%= text_field_tag('contentItemTitle', 'sample1.txt') %>
+
+          <label class="form-label" for="contentItemUrl">Content Item Url (should point to a real file)</label>
+          <%= text_field_tag('contentItemUrl', 'https://filesamples.com/samples/document/txt/sample1.txt') %>
+
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+
+      <h2>Results Action</h2>
+
+      <h3>Retrieve results (user specific optional)</h3>
+      <%= form_tag('/ags/results', method: 'get') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="credential_id">Credential Id</label>
+          <%= number_field_tag('credential_id', '', required: true) %>
+
+          <label class="form-label" for="context_id">Course Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="line_item_id">Line Item Id</label>
+          <%= number_field_tag('line_item_id', '', required: true) %>
+
+          <label class="form-label" for="limit">Limit</label>
+          <%= number_field_tag('limit', '') %>
+
+          <label class="form-label" for="user_id">User Id</label>
+          <%= number_field_tag('user_id', '') %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+
+      <h2>Progress Action</h2>
+
+      <h3>Retrieve progress objects for file content items submitted in a Score</h3>
+      <%= form_tag('/ags/progress', method: 'get') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="credential_id">Credential Id</label>
+          <%= number_field_tag('credential_id', '', required: true) %>
+
+          <label class="form-label" for="context_id">Course Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="progress_id">Progress Id</label>
+          <%= number_field_tag('progress_id', '', required: true) %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+    </div>
+  </div>
+</div>

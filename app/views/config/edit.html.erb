@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="columns">
+    <div class="column col-12">
+      <h1>Configuration Editor</h1>
+      <%= form_tag("/config/#{@credential.id}", method: 'put') do %>
+        <div class="form-group">
+          <h2>Configuration Options</h2>
+
+          <label class="form-label" for="title">Tool Name</label>
+          <%= text_field(:config, :title) %>
+
+          <label class="form-label" for="icon_url">Icon Url</label>
+          <%= text_field(:config, :icon_url) %>
+
+          <label class="form-label" for="description">Description</label>
+          <%= text_field(:config, :description) %>
+
+          <label class="form-label" for="height">Height</label>
+          <%= number_field(:config, :height) %>
+
+          <label class="form-label" for="width">Width</label>
+          <%= number_field(:config, :width) %>
+
+          <h3>Edit Placement</h3>
+          <% @credential.extract_placements.each do |placement|%>
+            <p>
+              <h4><%= placement %></h4>
+              <label class="form-label" for="text">Text</label>
+              <%= text_field(placement.to_sym, :text) %>
+
+              <label class="form-label" for="text">Icon Url</label>
+              <%= text_field(placement.to_sym, :icon_url) %>
+
+              <label class="form-label" for="text">Message Type</label>
+              <%= text_field(placement.to_sym, :message_type) %>
+
+              <label class="form-label" for="text">Target Link Uri</label>
+              <%= text_field(placement.to_sym, :target_link_uri) %>
+
+              <label class="form-label" for="text">Canvas Icon Class</label>
+              <%= text_field(placement.to_sym, :canvas_icon_class) %>
+
+              <label class="form-label" for="text">Required Permissions</label>
+              <%= text_field(placement.to_sym, :required_permissions) %>
+            </p>
+          <% end %>
+
+          <h3>New Placements</h3>
+          <label class="form-label" for="placements">Placements</label>
+          <%= select_tag "placements", options_for_select(@placements), multiple: true %>
+
+          <label class="form-label" for="custom_fields">Custom Fields</label>
+          <%= text_area(:config, :custom_fields) %>
+          <p>
+            Add Custom fields by creating a comma separate list of key value pairs (ie. foo=$Canvas.user.id,bar=$Canvas.user.sisid)
+          </p>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+    </div>
+  </div>
+</div>

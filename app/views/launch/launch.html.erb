@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="columns">
+    <div class="column col-12">
+      <%# Deep Linking %>
+      <% if @deep_link_return_url.present? %>
+        <div class="accordion">
+          <input type="checkbox" id="deep-linking-accordion" name="accordion-checkbox" hidden checked>
+          <label class="accordion-header" for="deep-linking-accordion">
+            <i class="icon icon-arrow-right mr-1"></i>
+            Deep Linking
+          </label>
+          <div class="accordion-body" style="max-height: 100rem">
+            <%= render 'deep_linking_form' %>
+          </div>
+        </div>
+      <% end %>
+
+      <%# LTI 1.3 General info %>
+      <div class="accordion">
+        <input type="checkbox" id="lti-1-3-accordion" name="accordion-checkbox" hidden checked>
+        <label class="accordion-header" for="lti-1-3-accordion">
+          <i class="icon icon-arrow-right mr-1"></i>
+          LTI 1.3 Launch Summary
+        </label>
+        <div class="accordion-body">
+          <div class="form-group">
+            <label class="form-label" for="id-token">ID Token</label>
+            <textarea class="form-input" id="id-token" rows="5"><%= params[:id_token] %></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="public-key-endpoint">Public Key Endpoint</label>
+            <input class="form-input" type="text" id="public-key-endpoint" value="<%= @public_endpoint %>" disabled>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="decoded-jwt">Decoded JWT</label>
+            <textarea class="form-input" id="decoded-jwt" rows="10">
+              <%=JSON.pretty_generate(@decoded_jwt) %>
+            </textarea>
+          </div>
+
+          <div class="form-group">
+            <%= form_tag(@success_return_url, method: 'get') do %>
+              <label class="form-label" for="decoded-jwt">Success return URL</label>
+              <input class="form-input" type="text" id="success-return-url" value="<%= @success_return_url %>" disabled>
+              <%= submit_tag('Call the success return URL') %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="columns">
+    <div class="column col-12">
+      <h1>NRPS Request Form</h1>
+      <%= form_tag('/nrps/retrieve', method: 'post') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="credential_id">Credential Id</label>
+          <%= number_field_tag('credential_id', '', required: true) %>
+
+          <label class="form-label" for="context_type">Context Type</label>
+          <%= select_tag "context_type", options_for_select(%i[courses groups], :courses) %>
+
+          <label class="form-label" for="context_id">Context Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="rlid">Rlid Parameter (Resource Link Id)</label>
+          <%= text_field_tag('rlid', '') %>
+
+          <label class="form-label" for="role">Role Parameter</label>
+          <%= text_field_tag('role', '') %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+    </div>
+  </div>
+</div>

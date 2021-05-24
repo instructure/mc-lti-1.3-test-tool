@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="columns">
+    <div class="column col-12">
+      <h1>Configuration Creator</h1>
+      <%= form_tag('/config', method: 'post') do %>
+        <div class="form-group">
+          <h2>Platform Information</h2>
+          <label class="form-label" for="iss">Issuer (Iss) *(Required)</label>
+          <%= text_field_tag('iss', '', required: true) %>
+
+          <label class="form-label" for="platform_url">Platform Host Url (ie http://web.canvas-lms.docker)</label>
+          <%= text_field_tag('platform_url', '', required: true) %>
+
+          <label class="form-label" for="grant_url">Grant Url</label>
+          <%= text_field_tag('grant_url', '') %>
+
+          <label class="form-label" for="public_key_endpoint">Public Key Endpoint</label>
+          <%= text_field_tag('public_key_endpoint', '') %>
+
+          <label class="form-label" for="authentication_redirect_endpoint">Authentication Redirect Endpoint</label>
+          <%= text_field_tag('authentication_redirect_endpoint') %>
+
+          <label class="form-label" for="platform_guid">Platform Guid</label>
+          <%= text_field_tag('platform_guid') %>
+
+          <label class="form-label" for="nrps_courses">Names and Roles Provisioning Service (NRPS) Courses Endpoint</label>
+          <%= text_field_tag('nrps_courses') %>
+
+          <label class="form-label" for="nrps_groups">Names and Roles Provisioning Service (NRPS) Groups Endpoint</label>
+          <%= text_field_tag('nrps_groups') %>
+
+          <label class="form-label" for="ags_url">Assignments and Grades Service (AGS) Endpoint</label>
+          <%= text_field_tag('ags_url') %>
+
+          <label class="form-label" for="data_services_url">Data Services Endpoint</label>
+          <%= text_field_tag('data_services_url') %>
+
+          <label class="form-label" for="feature_flags_url">Feature Flags Endpoint</label>
+          <%= text_field_tag('feature_flags_url') %>
+        </div>
+        <div class="form-group">
+          <h2>Configuration Options</h2>
+
+          <label class="form-label" for="title">Tool Name</label>
+          <%= text_field_tag('title', '') %>
+
+          <label class="form-label" for="icon_url">Icon Url</label>
+          <%= text_field_tag('icon_url', '') %>
+
+          <label class="form-label" for="description">Description</label>
+          <%= text_field_tag('description', '') %>
+
+          <label class="form-label" for="height">Height</label>
+          <%= number_field_tag('height', '') %>
+
+          <label class="form-label" for="width">Width</label>
+          <%= number_field_tag('width', '') %>
+
+          <label class="form-label" for="placements">Placements</label>
+          <%= select_tag "placements", options_for_select(@placements, 'course_navigation'), multiple: true %>
+
+          <label class="form-label" for="scopes">Scopes</label>
+          <%= select_tag "scopes", options_for_select(@scopes, 'all'), multiple: true %>
+
+          <label class="form-label" for="custom_fields">Custom Fields</label>
+          <%= text_area_tag "custom_fields" %>
+          <p>
+            Add Custom fields by creating a comma separate list of key value pairs (ie. foo=$Canvas.user.id,bar=$Canvas.user.sisid)
+          </p>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+    </div>
+  </div>
+</div>

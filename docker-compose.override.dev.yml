@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  web:
+    environment:
+      DISABLE_SUB_CLAIM_VERIFICATION: 'false'
+
+    volumes:
+      - .:/usr/src/app
+      - bundled-gems:/home/docker/.gem/ruby
+      - ./docker/database.yml:/usr/src/app/config/database.yml
+
+  postgres:
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+volumes:
+  bundled-gems: {}
+  logs: {}
+  node-modules: {}
+  pg-data: {}
+  tmp: {}

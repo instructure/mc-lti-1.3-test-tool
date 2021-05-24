@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="columns">
+    <div class="column col-12">
+      <h1>Data Services Request Form</h1>
+      Make a request to create, update, read, list, or destroy your data services subscriptions.
+
+      <h2>Data Services Actions</h2>
+
+      <h3>Show / List</h3>
+      <%= form_tag("/developer_key/#{@credential.id}/data_services", method: 'get') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="context_id">Platform Context Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="credential_id">Credential Id (Omit to list)</label>
+          <%= text_field_tag('credential_id', '') %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+
+      <h3>Destroy</h3>
+      <%= form_tag("/developer_key/#{@credential.id}/data_services", method: 'delete') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="context_id">Platform Context Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="credential_id">*Credential Id</label>
+          <%= text_field_tag('credential_id', '', required: true) %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+
+      <h3>Create</h3>
+      <%= form_tag("/developer_key/#{@credential.id}/data_services", method: 'post') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="context_id">Platform Context Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="ContextId">Data Service ContextId</label>
+          <%= text_field_tag('ContextId', '', required: true) %>
+
+          <label class="form-label" for="ContextType">ContextType</label>
+          <%= text_field_tag('ContextType', '', required: true) %>
+
+          <label class="form-label" for="EventTypes">EventTypes (Comma separated values)</label>
+          <%= text_field_tag('EventTypes', '', required: true) %>
+
+          <label class="form-label" for="Format">Format</label>
+          <%= text_field_tag('Format', '', required: true) %>
+
+          <label class="form-label" for="TransportMetadata">TransportMetadata (url value)</label>
+          <%= text_field_tag('TransportMetadata', '', required: true) %>
+
+          <label class="form-label" for="TransportType">TransportType</label>
+          <%= select_tag "TransportType", options_for_select(['sqs', 'https'], 'sqs') %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+
+      <h3>Update</h3>
+      <%= form_tag("/developer_key/#{@credential.id}/data_services", method: 'put') do %>
+        <div style="margin-bottom: 15px;">
+          <label class="form-label" for="context_id">Platform Context Id</label>
+          <%= number_field_tag('context_id', '', required: true) %>
+
+          <label class="form-label" for="ContextId">Data Service ContextId</label>
+          <%= text_field_tag('ContextId', '', required: true) %>
+
+          <label class="form-label" for="ContextType">ContextType</label>
+          <%= text_field_tag('ContextType', '', required: true) %>
+
+          <label class="form-label" for="EventTypes">EventTypes (Comma separated values)</label>
+          <%= text_field_tag('EventTypes', '', required: true) %>
+
+          <label class="form-label" for="Format">Format</label>
+          <%= text_field_tag('Format', '', required: true) %>
+
+          <label class="form-label" for="TransportMetadata">TransportMetadata (url value)</label>
+          <%= text_field_tag('TransportMetadata', '', required: true) %>
+
+          <label class="form-label" for="TransportType">TransportType (url value)</label>
+          <%= select_tag "TransportType", options_for_select(['sqs', 'https'], 'sqs') %>
+        </div>
+        <%= submit_tag('Submit') %>
+      <% end %>
+    </div>
+  </div>
+</div>

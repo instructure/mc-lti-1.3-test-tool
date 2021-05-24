@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      RAILS_ENV: development
+      VIRTUAL_HOST: lti13testtool.docker
+      REDIS_URL: redis://redis:6379
+    links:
+      - postgres
+      - redis
+    logging:
+      options:
+        max-file: '5'
+        max-size: 1m
+    networks:
+      - default
+
+  redis:
+    image: redis:3.2
+    logging:
+      options:
+        max-file: '5'
+        max-size: 1m
+
+  postgres:
+    image: postgres:9.6.8
+    logging:
+      options:
+        max-file: '5'
+        max-size: 1m
+
+  pgweb:
+    image: sosedoff/pgweb
+    command: [
+      /usr/bin/pgweb, --bind=0.0.0.0, --ssl=disable, --db=lti-1_3-test-tool_development,
+      --host=postgres, --user=postgres, --pass=lti-13-test-tool-password
+    ]
+    environment:
+      VIRTUAL_HOST: pgweb.lti13testtool.docker
+    links:
+      - postgres

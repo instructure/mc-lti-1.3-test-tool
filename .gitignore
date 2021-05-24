@@ -1,0 +1,29 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+/log
+
+# Ignore application configuration
+/config/application.yml
+.DS_Store
+
+/doc
+/coverage
+
+docker-compose.override.yml
+.vscode
+
+#byebug
+.byebug_history
+
+# Other things we ignore for now
+config/secrets.yml.enc
+config/secrets.yml.key
+storage/*
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+/config/local_jwt.yml

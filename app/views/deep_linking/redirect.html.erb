@@ -1,0 +1,7 @@
+<%= form_tag(@deep_link_return_url, method: 'post', id: 'redirect-form') do %>
+  <%= hidden_field_tag(:JWT, @jwt) %>
+<% end %>
+
+<script type="text/javascript">
+  document.getElementById('redirect-form').submit();
+</script>
